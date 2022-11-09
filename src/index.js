@@ -1,23 +1,14 @@
-import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import 'react-native-gesture-handler';
+import React from 'react';
+import {useColorScheme} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './screens/Home';
 
-console.disableYellowBox = true;
-import Routes from './routes';
+export default function App() {
+  const isDarkMode = useColorScheme() === 'dark';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Routes />
-      </View>
-    );
-  }
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  return <HomeScreen />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  },
-});

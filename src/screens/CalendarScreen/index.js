@@ -1,8 +1,8 @@
 import {styles} from './styles.js';
 import React from 'react';
-import {Image, SafeAreaView, useColorScheme, View} from 'react-native';
+import {Image, SafeAreaView, View} from 'react-native';
 
-export default function HomeScreen() {
+export default function CalendarScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View>

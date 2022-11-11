@@ -2,26 +2,26 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'blue',
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   imageLogo: {
     alignSelf: 'center',
   },
   button: {
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 200,
-    height: 60,
-    backgroundColor: 'blue',
+    width: 150,
+    height: 80,
+    backgroundColor: 'red',
     borderRadius: 50,
-    position: 'absolute',
-    bottom: 50,
   },
   textButton: {
     margin: 10,
-    fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
   },

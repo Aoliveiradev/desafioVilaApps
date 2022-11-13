@@ -9,7 +9,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ChallengeScreen"
+        initialRouteName="HomeScreen"
         screenOptions={{
           headerShown: false,
         }}>

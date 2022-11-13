@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#0F3F49',
     borderBottomRightRadius: 70,
-    padding: '10%',
+    padding: '2%',
   },
   containerSuport: {
     width: '50%',

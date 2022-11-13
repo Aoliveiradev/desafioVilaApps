@@ -5,22 +5,24 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CardComponent from '../../components/Card';
 import {ReactNativeModal} from 'react-native-modal';
 import {Input} from '@rneui/themed';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ChallengeScreen() {
-  const sucessImage = require('../../assets/Success.png');
-  const errorImage = require('../../assets/Error.png');
-
   const [isModalVisible, setModalVisible] = useState(false);
-  const [conclusionImage, setConclusionImage] = useState(sucessImage);
-  const [modalError, setModalError] = useState('');
+  const navigation = useNavigation();
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.backgroundWhite}>
         <View style={styles.backgroundUpBlue}>
+          <FontAwesome5
+            name={'arrow-left'}
+            size={25}
+            onPress={() => {
+              navigation.navigate('HomeScreen');
+            }}
+            style={{position: 'absolute', margin: 25}}
+          />
           <Text style={styles.textTittle}>Crie um Evento</Text>
           <TouchableOpacity
             onPress={() => {

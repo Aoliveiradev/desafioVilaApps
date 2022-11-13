@@ -1,10 +1,14 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {flexDirection: 'row'},
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   card: {
     alignSelf: 'center',
-    width: '95%',
+    width: '90%',
     height: 60,
     backgroundColor: 'white',
     borderColor: 'blue',
@@ -47,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   crudSection: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingLeft: 5,
   },
   crudIconsEdit: {
     marginRight: 15,
@@ -57,5 +61,109 @@ export const styles = StyleSheet.create({
   crudIconsDelete: {
     color: 'red',
     alignSelf: 'center',
+  },
+  iconModalButton: {
+    alignSelf: 'center',
+  },
+  centeredView: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    alignItems: 'center',
+    position: 'absolute',
+    justifyContent: 'center',
+  },
+  modalContainer: {
+    backgroundColor: '#ffffff',
+    width: '90%',
+    height: 380,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: '#007aff',
+    shadowOffset: {
+      width: 5,
+      height: 6,
+    },
+  },
+  imageModal: {
+    alignSelf: 'center',
+  },
+  modalText: {
+    fontSize: 14,
+    color: '#007aff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 15,
+  },
+  modalDeleteText: {
+    fontSize: 14,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 15,
+  },
+  modalInput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  confirmSection: {
+    width: '80%',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    marginTop: 30,
+  },
+  ButtonOk: {
+    borderWidth: 2,
+    borderColor: '#0F3F49',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+    color: '#0F3F49',
+  },
+  ButtonClose: {
+    borderWidth: 2,
+    borderColor: '#e80000',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+  },
+  ButtonDelete: {
+    borderWidth: 3,
+    borderColor: '#16600f',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+  },
+  ButtonCancelDelete: {
+    borderWidth: 3,
+    borderColor: '#e80000',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+  },
+  tittleDescricao: {
+    alignSelf: 'center',
+    fontSize: 25,
+    color: '#0F3F49',
+    fontWeight: 'bold',
+    marginVertical: 25,
+  },
+  textDescricao: {
+    textAlign: 'justify',
+    fontSize: 12,
+    color: 'black',
   },
 });

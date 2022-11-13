@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   backgroundDownWhite: {
-    flexGrow: 1,
     width: '200%',
     height: '100%',
     backgroundColor: '#d9d9d9',
@@ -34,6 +33,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 40,
+    paddingHorizontal: 40,
   },
   textTittle: {
     fontSize: 30,

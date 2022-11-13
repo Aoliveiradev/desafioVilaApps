@@ -1,13 +1,6 @@
 import {styles} from './styles.js';
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Image,
-  TextInput,
-} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import CardComponent from '../../components/Card';
 import {ReactNativeModal} from 'react-native-modal';

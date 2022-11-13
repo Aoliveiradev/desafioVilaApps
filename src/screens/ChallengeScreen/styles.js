@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100,
+    width: 180,
     height: 30,
     borderRadius: 50,
     backgroundColor: '#0F3F49',
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
   sectionTextTittle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 15,
   },
 
   iconModalButton: {

@@ -28,11 +28,11 @@ export default function ChallengeScreen() {
         <View style={styles.containerSuport}>
           <View style={styles.backgroundDownWhite}>
             <View style={styles.sectionTittle}>
-              <Text style={styles.sectionTextTittle}>Hoje</Text>
+              <Text style={styles.sectionTextTittle}>Eventos do Dia</Text>
             </View>
             <CardComponent />
             <View style={styles.sectionTittle}>
-              <Text style={styles.sectionTextTittle}>Semana</Text>
+              <Text style={styles.sectionTextTittle}>Eventos da Semana</Text>
             </View>
             <CardComponent />
             <CardComponent />

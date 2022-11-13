@@ -1,21 +1,45 @@
-import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles.js';
+import React from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useNavigation} from '@react-navigation/native';
+import CardComponent from '../../components/Card';
 
 export default function ChallengeScreen() {
-  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.imageLogo}
-        source={require('../../assets/Success.png')}
-      />
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
-        <FontAwesome5 name={'calendar'} size={20} color={'white'} />
-        <Text style={styles.textButton}>CALLENDAR</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.backgroundWhite}>
+        <View style={styles.backgroundUpBlue}>
+          <Text style={styles.textTittle}>Cadastre um Evento</Text>
+          <TouchableOpacity style={styles.modalButton}>
+            <FontAwesome5
+              name={'calendar-week'}
+              style={styles.iconModalButton}
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.containerSuport}>
+          <View style={styles.backgroundDownWhite}>
+            <View style={styles.sectionTittle}>
+              <Text style={styles.sectionTextTittle}>Hoje</Text>
+            </View>
+            <CardComponent />
+            <View style={styles.sectionTittle}>
+              <Text style={styles.sectionTextTittle}>Semana</Text>
+            </View>
+            <CardComponent />
+            <CardComponent />
+            <CardComponent />
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }

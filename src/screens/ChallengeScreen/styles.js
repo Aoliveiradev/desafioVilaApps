@@ -72,4 +72,52 @@ export const styles = StyleSheet.create({
   iconModalButton: {
     alignSelf: 'center',
   },
+  centeredView: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    alignItems: 'center',
+    position: 'absolute',
+    justifyContent: 'center',
+  },
+  modalContainer: {
+    backgroundColor: '#ffffff',
+    width: '90%',
+    height: 380,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: '#007aff',
+    shadowOffset: {
+      width: 5,
+      height: 6,
+    },
+  },
+  imageModal: {
+    alignSelf: 'center',
+  },
+  modalText: {
+    fontSize: 14,
+    color: '#007aff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 15,
+  },
+  modalInput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  ButtonOk: {
+    borderWidth: 2,
+    borderColor: '#0F3F49',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+    color: '#0F3F49',
+  },
 });

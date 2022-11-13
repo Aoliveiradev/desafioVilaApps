@@ -3,16 +3,6 @@ import React, {useState} from 'react';
 import {Button, Image, Modal, Text, TouchableOpacity, View} from 'react-native';
 
 export default function ModalComponent() {
-  const sucessImage = require('../../assets/Success.png');
-  const errorImage = require('../../assets/Error.png');
-
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [conclusionImage, setConclusionImage] = useState(sucessImage);
-  const [modalError, setModalError] = useState('');
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
   return (
     <View style={{flex: 1, alignSelf: 'center'}}>
       <Button title="Show modal" onPress={toggleModal} />

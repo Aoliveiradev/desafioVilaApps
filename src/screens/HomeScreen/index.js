@@ -18,7 +18,7 @@ export default function HomeScreen() {
             fontSize: 18,
             fontWeight: 'bold',
             margin: 10,
-            color: 'black',
+            color: '#0F3F49',
           }}>
           Crie um aplicativo em React Native com os seguintes requisitos: {'\n'}
         </Text>
@@ -26,18 +26,18 @@ export default function HomeScreen() {
         O usuário poderá criar um evento e colocar a quantidade de dias até o
         evento ocorrer, ou poderá colocar a data do evento (o aplicativo deverá
         aceitar as duas formas). {'\n'}
-        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0F3F49'}}>
           Versão do aplicativo: {'\n'}
         </Text>
         <Text> Maior ou igual a 0.6 {'\n'}</Text>
-        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0F3F49'}}>
           Aplicativo deverá conter: {'\n'}
         </Text>
         - Modal para criação do evento (deverá ter entradas de título do evento,
         quantidade de dias ou data do evento e descrição do evento); - Lista dos
         eventos e da quantidade de dias restantes até a realização do mesmo; -
         Botão para excluir um evento.{'\n'}
-        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0F3F49'}}>
           Adicionais (opcional):{'\n'}
         </Text>
         - Layout e experiência do usuário agradáveis; - Adicionar navegação ao

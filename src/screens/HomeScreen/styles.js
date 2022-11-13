@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: 200,
     height: 60,
-    backgroundColor: 'blue',
+    backgroundColor: '#0F3F49',
     borderRadius: 50,
     position: 'absolute',
     bottom: 50,

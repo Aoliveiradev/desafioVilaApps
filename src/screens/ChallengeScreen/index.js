@@ -16,7 +16,7 @@ export default function ChallengeScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.backgroundWhite}>
         <View style={styles.backgroundUpBlue}>
-          <Text style={styles.textTittle}>Cadastre um Evento</Text>
+          <Text style={styles.textTittle}>Crie um Evento</Text>
           <TouchableOpacity style={styles.modalButton}>
             <FontAwesome5
               name={'calendar-week'}
@@ -34,6 +34,7 @@ export default function ChallengeScreen() {
             <View style={styles.sectionTittle}>
               <Text style={styles.sectionTextTittle}>Semana</Text>
             </View>
+            <CardComponent />
             <CardComponent />
             <CardComponent />
             <CardComponent />

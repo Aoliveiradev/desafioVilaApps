@@ -4,18 +4,18 @@ export const styles = StyleSheet.create({
   container: {flexDirection: 'row'},
   card: {
     alignSelf: 'center',
-    width: 300,
+    width: '95%',
     height: 60,
     backgroundColor: 'white',
     borderColor: 'blue',
     flexDirection: 'row',
     borderRadius: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
     marginVertical: 15,
-    marginRight: 10,
+    marginHorizontal: 10,
   },
   cardContainer: {
     flexDirection: 'row',
@@ -31,12 +31,7 @@ export const styles = StyleSheet.create({
   cardIconTittle: {
     color: '#4682B4',
     alignSelf: 'center',
-    marginRight: 10,
-  },
-  cardIconClock: {
-    color: '#4682B4',
-    alignSelf: 'center',
-    marginRight: 10,
+    marginRight: 5,
   },
   cardTextDate: {
     alignSelf: 'center',
@@ -50,20 +45,17 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
   },
-  cardTextHour: {
-    alignSelf: 'center',
-    color: '#485162',
-    fontWeight: 'bold',
-    fontSize: 12,
+  crudSection: {
+    flexDirection: 'row',
+    paddingHorizontal: 10,
   },
   crudIconsEdit: {
+    marginRight: 15,
     color: '#5f6405',
-    margin: 5,
     alignSelf: 'center',
   },
   crudIconsDelete: {
     color: 'red',
-    margin: 5,
     alignSelf: 'center',
   },
 });

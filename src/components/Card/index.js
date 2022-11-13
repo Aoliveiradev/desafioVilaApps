@@ -31,20 +31,17 @@ export default function CardComponent() {
             color={'green'}
             style={styles.cardIconTittle}
           />
-          <Text style={styles.cardTextTitle}>Dentista</Text>
+          <Text style={styles.cardTextTitle}>Agendamento do seguro</Text>
         </View>
-        <View style={styles.cardContainer}>
+        <View style={styles.crudSection}>
+          <FontAwesome5 name={'edit'} size={20} style={styles.crudIconsEdit} />
           <FontAwesome5
-            name={'clock'}
-            size={18}
-            color={'green'}
-            style={styles.cardIconClock}
+            name={'trash'}
+            size={20}
+            style={styles.crudIconsDelete}
           />
-          <Text style={styles.cardTextHour}>15:55</Text>
         </View>
       </TouchableOpacity>
-      <FontAwesome5 name={'edit'} size={20} style={styles.crudIconsEdit} />
-      <FontAwesome5 name={'trash'} size={20} style={styles.crudIconsDelete} />
     </View>
   );
 }

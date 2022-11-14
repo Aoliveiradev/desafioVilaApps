@@ -2,27 +2,34 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  scrollView: {
+    width: '100%',
   },
   card: {
     alignSelf: 'center',
-    width: '90%',
+    width: 320,
     height: 60,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     borderColor: 'blue',
     flexDirection: 'row',
     borderRadius: 12,
     paddingHorizontal: 10,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignContent: 'center',
     alignItems: 'center',
-    marginVertical: 15,
-    marginHorizontal: 10,
+    marginVertical: 10,
   },
   cardContainer: {
     flexDirection: 'row',
+  },
+  cardContainerCountDown: {
+    flexDirection: 'row',
+    marginLeft: 15,
+    justifyContent: 'flex-end',
   },
   cardContainerDate: {
     flexDirection: 'column',
@@ -41,7 +48,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#485162',
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 14,
+    marginRight: 20,
   },
   cardTextTitle: {
     alignSelf: 'center',
@@ -72,6 +80,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   modalContainer: {
     backgroundColor: '#ffffff',
@@ -163,7 +172,7 @@ export const styles = StyleSheet.create({
   },
   textDescricao: {
     textAlign: 'justify',
-    fontSize: 12,
+    fontSize: 14,
     color: 'black',
   },
 });

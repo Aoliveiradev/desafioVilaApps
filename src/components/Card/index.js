@@ -8,15 +8,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  DatePickerAndroid,
+  Modal,
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Input} from '@rneui/themed';
-import {ReactNativeModal} from 'react-native-modal';
 
 export default function CardComponent() {
-  const sucessImage = require('../../assets/Success.png');
-  const sucessMesage = 'EVENTO EXCLUIDO COM SUCESSO !!!';
   const errorImage = require('../../assets/Error.png');
   const deleteMesage = 'TEM CERTEZA QUE DESEJA EXCLUIR O EVENTO ?';
 
@@ -33,11 +30,45 @@ export default function CardComponent() {
   const [eventIdEdit, setEventIdEdit] = useState(0);
   const [modalTextError, setModalTextError] = useState(deleteMesage);
   const [modalDeleteImage, setModalDeleteImage] = useState(errorImage);
+  const [dayNew, setDayNew] = useState(0);
+  const [dayOld, setDayOld] = useState(0);
+  const [monthNew, setMonthNew] = useState(0);
+  const [monthOld, setMonthOld] = useState(0);
+  const [yearNew, setYearNew] = useState(0);
+  const [yearOld, setYearOld] = useState(0);
+  const [countDownText, setcountDownText] = useState('');
 
   useEffect(() => {
     getData();
+    countdown();
   }, []);
-  const newDate = new Date();
+
+  const countdown = () => {
+    const newDate = new Date();
+
+    const newDateSubstring = newDate.toISOString().substring(0, 10);
+    const dateOld = eventDate;
+    const dateNew = newDateSubstring;
+
+    const [dayOld, monthOld, yearOld] = dateOld.split('/');
+    const [yearNew, monthNew, dayNew] = dateNew.split('-');
+    console.log('Inicio', eventDate, countDownText);
+
+    setDayNew(dayNew);
+    setDayOld(dayOld);
+    setMonthNew(monthNew);
+    setMonthOld(monthOld);
+    setYearNew(yearNew);
+    setYearOld(yearOld);
+    const days = dayOld - dayNew;
+    if (days <= 0) {
+      setcountDownText(0);
+    } else {
+      setcountDownText(days);
+    }
+    console.log('pqp123', countDownText);
+  };
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
@@ -45,6 +76,7 @@ export default function CardComponent() {
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
+
   const editarEvento = async (
     newDate,
     eventDate,
@@ -82,15 +114,6 @@ export default function CardComponent() {
     return null;
   };
 
-  const countdown = () => {
-    const d1 = eventDate;
-    const date = newDate;
-    const date2 =
-      date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    let yearsApart =
-      new Date(new Date('21/12/2022') - new Date(date2)).getFullYear() - 1970;
-    console.log('NewDate', newDate, 'EventDate', eventDate, 'NOVO', yearsApart);
-  };
   const deleteEvento = async eventId => {
     console.log(eventId);
     const id = eventId;
@@ -115,7 +138,6 @@ export default function CardComponent() {
       );
       const json = await response.json();
       setData(json);
-      countdown();
     } catch (error) {
       console.error(error);
     }
@@ -135,6 +157,8 @@ export default function CardComponent() {
                 onPress={() => {
                   setModalVisibleDescription(!isModalVisibleDescription);
                   setEventId(event.event_id - 1);
+                  setEventDate(event.event_date);
+                  console.log('clickei', event.event_date, eventDate);
                 }}
                 style={styles.card}>
                 <View style={styles.cardContainer}>
@@ -156,25 +180,11 @@ export default function CardComponent() {
                   />
                   <Text style={styles.cardTextTitle}>{event.event_tittle}</Text>
                 </View>
-                <View style={styles.cardContainerCountDown}>
-                  <FontAwesome5
-                    name={'clock'}
-                    size={18}
-                    color={'green'}
-                    style={styles.cardIconTittle}
-                  />
-                  <Text style={styles.cardTextTitle}>5 dias</Text>
-                </View>
               </TouchableOpacity>
-              <ReactNativeModal
-                isVisible={isModalEditVisible}
-                backdropOpacity={0.8}
-                animationIn="zoomInDown"
-                animationOut="zoomOutUp"
-                animationInTiming={600}
-                animationOutTiming={600}
-                backdropTransitionInTiming={600}
-                backdropTransitionOutTiming={600}>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isModalEditVisible}>
                 <View style={styles.centeredView}>
                   <View style={styles.modalContainer}>
                     <Input
@@ -228,16 +238,11 @@ export default function CardComponent() {
                     </TouchableOpacity>
                   </View>
                 </View>
-              </ReactNativeModal>
-              <ReactNativeModal
-                isVisible={isModalVisibleDelete}
-                backdropOpacity={0.8}
-                animationIn="zoomInDown"
-                animationOut="zoomOutUp"
-                animationInTiming={600}
-                animationOutTiming={600}
-                backdropTransitionInTiming={600}
-                backdropTransitionOutTiming={600}>
+              </Modal>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isModalVisibleDelete}>
                 <View style={styles.centeredView}>
                   <View style={styles.modalContainer}>
                     <Image
@@ -276,16 +281,11 @@ export default function CardComponent() {
                     </View>
                   </View>
                 </View>
-              </ReactNativeModal>
-              <ReactNativeModal
-                isVisible={isModalVisibleDescription}
-                backdropOpacity={0.8}
-                animationIn="zoomInDown"
-                animationOut="zoomOutUp"
-                animationInTiming={600}
-                animationOutTiming={600}
-                backdropTransitionInTiming={600}
-                backdropTransitionOutTiming={600}>
+              </Modal>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isModalVisibleDescription}>
                 <View style={styles.centeredView}>
                   <View style={styles.modalContainer}>
                     <View
@@ -294,6 +294,16 @@ export default function CardComponent() {
                         justifyContent: 'flex-start',
                         top: 20,
                       }}>
+                      <View style={styles.cardContainerCountDown}>
+                        <FontAwesome5
+                          name={'clock'}
+                          size={18}
+                          style={styles.cardIconTittle}
+                        />
+                        <Text style={styles.cardTextTitle}>
+                          {countDownText}
+                        </Text>
+                      </View>
                       <Text style={styles.tittleDescricao}>Descrição</Text>
                       <Text style={styles.textDescricao}>
                         {data[eventId].event_description}
@@ -313,7 +323,7 @@ export default function CardComponent() {
                     </TouchableOpacity>
                   </View>
                 </View>
-              </ReactNativeModal>
+              </Modal>
               <View style={styles.crudSection}>
                 <TouchableOpacity
                   onPress={() => {

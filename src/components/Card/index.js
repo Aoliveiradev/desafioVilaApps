@@ -30,12 +30,12 @@ export default function CardComponent() {
   const [eventIdEdit, setEventIdEdit] = useState(0);
   const [modalTextError, setModalTextError] = useState(deleteMesage);
   const [modalDeleteImage, setModalDeleteImage] = useState(errorImage);
-  const [dayNew, setDayNew] = useState(0);
-  const [dayOld, setDayOld] = useState(0);
-  const [monthNew, setMonthNew] = useState(0);
-  const [monthOld, setMonthOld] = useState(0);
-  const [yearNew, setYearNew] = useState(0);
-  const [yearOld, setYearOld] = useState(0);
+  const [novoDia, setNovoDia] = useState(0);
+  const [diaAntigo, setDiaAntigo] = useState(0);
+  const [novoMes, setNovoMes] = useState(0);
+  const [mesAntigo, setMesAntigo] = useState(0);
+  const [novoAno, setNovoAno] = useState(0);
+  const [anoAntigo, setAnoAntigo] = useState(0);
   const [countDownText, setcountDownText] = useState('');
 
   useEffect(() => {
@@ -54,21 +54,29 @@ export default function CardComponent() {
     const [yearNew, monthNew, dayNew] = dateNew.split('-');
     console.log('Inicio', eventDate, countDownText);
 
-    setDayNew(dayNew);
-    setDayOld(dayOld);
-    setMonthNew(monthNew);
-    setMonthOld(monthOld);
-    setYearNew(yearNew);
-    setYearOld(yearOld);
-    if (dayOld > dayNew) {
+    setNovoDia(dayNew);
+    setDiaAntigo(dayOld);
+    setNovoMes(monthNew);
+    setMesAntigo(monthOld);
+    setNovoAno(yearNew);
+    setAnoAntigo(yearOld);
+    console.log('diaANTIGO: ', diaAntigo);
+    if (diaAntigo > novoDia) {
       setcountDownText(
-        'Seu evento acontecerá em ' + (dayOld - dayNew) + ' dias.',
+        'Seu evento acontecerá em ' + (diaAntigo - novoDia) + ' dias.',
       );
-    } else if (dayNew > dayOld) {
+    } else if (novoDia > diaAntigo) {
       setcountDownText('EXPIRADO');
     }
 
-    console.log('dayOld: ', dayOld, 'dayNew: ', dayNew, 'dateNew: ', dateNew);
+    console.log(
+      'dayOld: ',
+      diaAntigo,
+      'dayNew: ',
+      novoDia,
+      'dateNew: ',
+      dateNew,
+    );
   };
 
   const onRefresh = React.useCallback(() => {
@@ -159,6 +167,7 @@ export default function CardComponent() {
                   setModalVisibleDescription(!isModalVisibleDescription);
                   setEventId(event.event_id);
                   setEventDate(event.event_date);
+                  console.log('eventDate:', eventDate);
                   countdown();
                   console.log('eventDateInicial', event.event_date);
                 }}

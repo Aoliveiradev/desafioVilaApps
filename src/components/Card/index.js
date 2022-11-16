@@ -47,6 +47,7 @@ export default function CardComponent() {
 
     const newDateSubstring = newDate.toISOString().substring(0, 10);
     const dateOld = eventDate;
+    console.log(eventDate);
     const dateNew = newDateSubstring;
 
     const [dayOld, monthOld, yearOld] = dateOld.split('/');
@@ -59,14 +60,15 @@ export default function CardComponent() {
     setMonthOld(monthOld);
     setYearNew(yearNew);
     setYearOld(yearOld);
-    const days = dayOld - dayNew;
-    if (days <= 0) {
-      setcountDownText(0);
-    } else {
-      setcountDownText(days);
+    if (dayOld > dayNew) {
+      setcountDownText(
+        'Seu evento acontecerá em ' + (dayOld - dayNew) + ' dias.',
+      );
+    } else if (dayNew > dayOld) {
+      setcountDownText('EXPIRADO');
     }
-    console.log('dayOld: ', dayOld, 'dayNew: ', dayNew);
-    console.log('123', countDownText);
+
+    console.log('dayOld: ', dayOld, 'dayNew: ', dayNew, 'dateNew: ', dateNew);
   };
 
   const onRefresh = React.useCallback(() => {
@@ -157,6 +159,8 @@ export default function CardComponent() {
                   setModalVisibleDescription(!isModalVisibleDescription);
                   setEventId(event.event_id);
                   setEventDate(event.event_date);
+                  countdown();
+                  console.log('eventDateInicial', event.event_date);
                 }}
                 style={styles.card}>
                 <View style={styles.cardContainer}>
@@ -177,15 +181,6 @@ export default function CardComponent() {
                     style={styles.cardIconTittle}
                   />
                   <Text style={styles.cardTextTitle}>{event.event_tittle}</Text>
-                </View>
-                <View style={styles.cardContainerCountDown}>
-                  <FontAwesome5
-                    name={'clock'}
-                    size={18}
-                    color={'green'}
-                    style={styles.cardIconTittle}
-                  />
-                  <Text style={styles.cardTextTitle}>{countDownText}</Text>
                 </View>
               </TouchableOpacity>
               <Modal
@@ -303,6 +298,17 @@ export default function CardComponent() {
                       <Text style={styles.textDescricao}>
                         {eventDescription}
                       </Text>
+                      <View style={styles.cardContainerCountDown}>
+                        <FontAwesome5
+                          name={'clock'}
+                          size={18}
+                          color={'green'}
+                          style={styles.cardIconTittle}
+                        />
+                        <Text style={styles.cardTextTitle}>
+                          {countDownText}
+                        </Text>
+                      </View>
                     </View>
                     <TouchableOpacity
                       style={styles.ButtonClose}
@@ -338,7 +344,6 @@ export default function CardComponent() {
                 <TouchableOpacity
                   onPress={() => {
                     setEventId(event.event_id);
-                    console.log('pqp12312321', eventId);
                     setModalVisibleDelete(!isModalVisibleDelete);
                     setModalDeleteImage(errorImage);
                     setModalTextError(deleteMesage);

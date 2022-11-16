@@ -40,7 +40,6 @@ export default function CardComponent() {
 
   useEffect(() => {
     getData();
-    countdown();
   }, []);
 
   const countdown = () => {
@@ -66,7 +65,8 @@ export default function CardComponent() {
     } else {
       setcountDownText(days);
     }
-    console.log('pqp123', countDownText);
+    console.log('dayOld: ', dayOld, 'dayNew: ', dayNew);
+    console.log('123', countDownText);
   };
 
   const onRefresh = React.useCallback(() => {
@@ -78,17 +78,14 @@ export default function CardComponent() {
   };
 
   const editarEvento = async (
-    newDate,
     eventDate,
     eventTittle,
     eventDescription,
     eventIdEdit,
   ) => {
-    const id = eventIdEdit;
-    console.log('pqp123', id);
     const response = await fetch(
       'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/' +
-        id,
+        eventIdEdit,
       {
         method: 'PUT',
         headers: {
@@ -97,7 +94,7 @@ export default function CardComponent() {
         },
 
         body: JSON.stringify({
-          created_at: newDate,
+          created_at: new Date().toISOString(),
           event_date: eventDate,
           event_tittle: eventTittle,
           event_description: eventDescription,
@@ -137,7 +134,9 @@ export default function CardComponent() {
         'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/',
       );
       const json = await response.json();
+      console.log(json);
       setData(json);
+      countdown();
     } catch (error) {
       console.error(error);
     }
@@ -156,9 +155,8 @@ export default function CardComponent() {
               <TouchableOpacity
                 onPress={() => {
                   setModalVisibleDescription(!isModalVisibleDescription);
-                  setEventId(event.event_id - 1);
+                  setEventId(event.event_id);
                   setEventDate(event.event_date);
-                  console.log('clickei', event.event_date, eventDate);
                 }}
                 style={styles.card}>
                 <View style={styles.cardContainer}>
@@ -180,6 +178,15 @@ export default function CardComponent() {
                   />
                   <Text style={styles.cardTextTitle}>{event.event_tittle}</Text>
                 </View>
+                <View style={styles.cardContainerCountDown}>
+                  <FontAwesome5
+                    name={'clock'}
+                    size={18}
+                    color={'green'}
+                    style={styles.cardIconTittle}
+                  />
+                  <Text style={styles.cardTextTitle}>{countDownText}</Text>
+                </View>
               </TouchableOpacity>
               <Modal
                 animationType="fade"
@@ -192,7 +199,7 @@ export default function CardComponent() {
                         setEventDate(newText);
                       }}
                       label="Data do Evento"
-                      placeholder={data[eventId].event_date}
+                      placeholder={eventDate}
                       leftIcon={{type: 'font-awesome', name: 'calendar'}}
                     />
                     <Input
@@ -200,7 +207,7 @@ export default function CardComponent() {
                         setEventTittle(newText);
                       }}
                       label="Titulo do Evento"
-                      placeholder={data[eventId].event_tittle}
+                      placeholder={eventTittle}
                       leftIcon={{type: 'font-awesome5', name: 'flag'}}
                     />
                     <Input
@@ -208,25 +215,21 @@ export default function CardComponent() {
                         setEventDescription(newText);
                       }}
                       label="Descrição do Evento"
-                      placeholder={data[eventId].event_description}
+                      placeholder={eventDescription}
                       leftIcon={{type: 'font-awesome5', name: 'edit'}}
                     />
 
                     <TouchableOpacity
                       style={styles.ButtonOk}
-                      onPress={() => {
-                        setEventDate(data[eventId].event_date);
-                        setEventTittle(data[eventId].event_tittle);
-                        setEventDescription(data[eventId].event_description);
-                        setEventIdEdit(eventId + 1);
-                        editarEvento(
-                          newDate,
+                      onPress={async () => {
+                        await editarEvento(
                           eventDate,
                           eventTittle,
                           eventDescription,
                           eventIdEdit,
                         );
 
+                        await getData();
                         setModalEditVisible(!isModalEditVisible);
                       }}>
                       <FontAwesome5
@@ -254,8 +257,9 @@ export default function CardComponent() {
                     <View style={styles.confirmSection}>
                       <TouchableOpacity
                         style={styles.ButtonDelete}
-                        onPress={() => {
-                          deleteEvento(eventId);
+                        onPress={async () => {
+                          await deleteEvento(eventId);
+                          await getData();
                           setModalVisibleDelete(!isModalVisibleDelete);
                         }}>
                         <FontAwesome5
@@ -269,6 +273,7 @@ export default function CardComponent() {
                       <TouchableOpacity
                         style={styles.ButtonCancelDelete}
                         onPress={() => {
+                          setEventId(0);
                           setModalVisibleDelete(!isModalVisibleDelete);
                         }}>
                         <FontAwesome5
@@ -294,19 +299,9 @@ export default function CardComponent() {
                         justifyContent: 'flex-start',
                         top: 20,
                       }}>
-                      <View style={styles.cardContainerCountDown}>
-                        <FontAwesome5
-                          name={'clock'}
-                          size={18}
-                          style={styles.cardIconTittle}
-                        />
-                        <Text style={styles.cardTextTitle}>
-                          {countDownText}
-                        </Text>
-                      </View>
                       <Text style={styles.tittleDescricao}>Descrição</Text>
                       <Text style={styles.textDescricao}>
-                        {data[eventId].event_description}
+                        {eventDescription}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -328,6 +323,9 @@ export default function CardComponent() {
                 <TouchableOpacity
                   onPress={() => {
                     setEventIdEdit(event.event_id);
+                    setEventDate(event.event_date);
+                    setEventTittle(event.event_tittle);
+                    setEventDescription(event.event_description);
                     setModalEditVisible(!isModalEditVisible);
                   }}>
                   <FontAwesome5

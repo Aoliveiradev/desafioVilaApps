@@ -18,7 +18,6 @@ export default function CardComponent() {
   const deleteMesage = 'TEM CERTEZA QUE DESEJA EXCLUIR O EVENTO ?';
 
   const [eventDate, setEventDate] = useState('');
-  const [countDownDate, setcountDownDate] = useState('');
   const [eventTittle, setEventTittle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
@@ -110,15 +109,19 @@ export default function CardComponent() {
     const newDate = new Date();
     const dateNew = newDate.toISOString().substring(0, 10);
 
-    const [dayOld, monthOld, yearOld] = eventDate2.split('/');
-    const [yearNew, monthNew, dayNew] = dateNew.split('-');
-    console.log('dia antigo: ', dayOld);
-
-    if (dayOld > dayNew) {
+    const [diaEvento, mesEvento, anoEvento] = eventDate2.split('/');
+    const [anoHoje, mesHoje, diaHoje] = dateNew.split('-');
+    const quantidadeDiasParaEvento =
+      diaEvento - diaHoje + (mesEvento - mesHoje) * 30;
+    if (quantidadeDiasParaEvento < 30 && quantidadeDiasParaEvento > 0) {
       setcountDownText(
-        'Seu evento acontecerá em ' + (dayOld - dayNew) + ' dias.',
+        'Seu evento acontecerá em ' + quantidadeDiasParaEvento + ' dias.',
       );
-    } else if (dayNew > dayOld) {
+    } else if (quantidadeDiasParaEvento > 30) {
+      setcountDownText(
+        'Seu evento acontecerá em ' + quantidadeDiasParaEvento + ' dias.',
+      );
+    } else {
       setcountDownText('EXPIRADO');
     }
   };
@@ -172,7 +175,7 @@ export default function CardComponent() {
                         setEventDate(newText);
                       }}
                       label="Data do Evento"
-                      placeholder={eventDate}
+                      placeholder={event.event_date}
                       leftIcon={{type: 'font-awesome', name: 'calendar'}}
                     />
                     <Input
@@ -193,18 +196,6 @@ export default function CardComponent() {
                     />
                     <View style={styles.buttonEdit}>
                       <TouchableOpacity
-                        style={styles.ButtonCancelDelete}
-                        onPress={() => {
-                          setModalEditVisible(!isModalEditVisible);
-                        }}>
-                        <FontAwesome
-                          name={'times'}
-                          size={25}
-                          style={{alignSelf: 'center'}}
-                          color={'red'}
-                        />
-                      </TouchableOpacity>
-                      <TouchableOpacity
                         style={styles.ButtonOk}
                         onPress={async () => {
                           await editarEvento(
@@ -221,6 +212,18 @@ export default function CardComponent() {
                           size={25}
                           style={{alignSelf: 'center'}}
                           color={'#0F3F49'}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.ButtonCancelDelete}
+                        onPress={() => {
+                          setModalEditVisible(!isModalEditVisible);
+                        }}>
+                        <FontAwesome
+                          name={'times'}
+                          size={25}
+                          style={{alignSelf: 'center'}}
+                          color={'red'}
                         />
                       </TouchableOpacity>
                     </View>
@@ -284,10 +287,6 @@ export default function CardComponent() {
                         justifyContent: 'flex-start',
                         top: 20,
                       }}>
-                      <Text style={styles.tittleDescricao}>Descrição</Text>
-                      <Text style={styles.textDescricao}>
-                        {eventDescription}
-                      </Text>
                       <View style={styles.cardContainerCountDown}>
                         <FontAwesome5
                           name={'clock'}
@@ -299,6 +298,10 @@ export default function CardComponent() {
                           {countDownText}
                         </Text>
                       </View>
+                      <Text style={styles.tittleDescricao}>Descrição</Text>
+                      <Text style={styles.textDescricao}>
+                        {eventDescription}
+                      </Text>
                     </View>
                     <TouchableOpacity
                       style={styles.ButtonClose}

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   backgroundWhite: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#ffffff',
     justifyContent: 'flex-start',
   },
   backgroundUpBlue: {
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   backgroundDownWhite: {
     width: '200%',
     height: '100%',
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#ffffff',
     borderTopLeftRadius: 70,
     flexDirection: 'column',
     justifyContent: 'flex-start',

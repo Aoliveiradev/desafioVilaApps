@@ -16,6 +16,8 @@ export const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#0F3F49',
     borderBottomRightRadius: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: '2%',
   },
   containerSuport: {
@@ -36,7 +38,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   textTittle: {
-    color: '#0F3F49',
+    color: '#ffffff',
     fontSize: 30,
     fontWeight: 'bold',
     alignSelf: 'center',
@@ -122,6 +124,21 @@ export const styles = StyleSheet.create({
     width: 50,
     height: 50,
     color: '#0F3F49',
-    margin: 10,
+  },
+  ButtonCancel: {
+    borderWidth: 2,
+    borderColor: '#e80000',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+  },
+
+  buttonContainer: {
+    width: '100%',
+    justifyContent: 'space-around',
+    marginTop: 25,
+    flexDirection: 'row',
   },
 });

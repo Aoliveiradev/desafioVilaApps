@@ -67,11 +67,7 @@ export default function ChallengeScreen() {
             <View style={styles.sectionTittle}>
               <Text style={styles.sectionTextTittle}>Eventos do Dia</Text>
             </View>
-
             <CardComponent />
-            {/*<View style={styles.sectionTittle}>*/}
-            {/*  <Text style={styles.sectionTextTittle}>Eventos da Semana</Text>*/}
-            {/*</View>*/}
           </View>
         </View>
       </View>

@@ -4,6 +4,7 @@ import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '@rneui/base';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function CreateScreen() {
   const [eventDate, setEventDate] = useState('');
@@ -39,18 +40,10 @@ export default function CreateScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.backgroundWhite}>
         <View style={styles.backgroundUpBlue}>
-          <FontAwesome5
-            name={'arrow-left'}
-            size={25}
-            onPress={() => {
-              navigation.navigate('ChallengeScreen');
-            }}
-            style={{position: 'absolute', margin: 25}}
-          />
+          <Text style={styles.textTittle}>Crie um Evento</Text>
         </View>
         <View style={styles.containerSuport}>
           <View style={styles.backgroundDownWhite}>
-            <Text style={styles.textTittle}>Crie um Evento</Text>
             <View style={styles.centeredView}>
               <View style={styles.modalContainer}>
                 <Input
@@ -76,19 +69,21 @@ export default function CreateScreen() {
                   leftIcon={{type: 'font-awesome5', name: 'edit'}}
                 />
               </View>
-              <TouchableOpacity
-                style={styles.ButtonOk}
-                onPress={async () => {
-                  await criarEvento(eventDate, eventTittle, eventDescription);
-                  await navigation.navigate('ChallengeScreen');
-                }}>
-                <FontAwesome5
-                  name={'cloud-upload-alt'}
-                  size={25}
-                  style={{alignSelf: 'center'}}
-                  color={'#0F3F49'}
-                />
-              </TouchableOpacity>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={styles.ButtonOk}
+                  onPress={async () => {
+                    await criarEvento(eventDate, eventTittle, eventDescription);
+                    await navigation.navigate('ChallengeScreen');
+                  }}>
+                  <FontAwesome5
+                    name={'cloud-upload-alt'}
+                    size={25}
+                    style={{alignSelf: 'center'}}
+                    color={'#0F3F49'}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>

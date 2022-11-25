@@ -10,16 +10,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   scrollView: {
     width: '100%',
   },
   card: {
     alignSelf: 'center',
-    width: 320,
+    width: 280,
     height: 60,
     backgroundColor: '#ffffff',
-    borderColor: 'blue',
     flexDirection: 'row',
     borderRadius: 12,
     paddingHorizontal: 10,
@@ -27,14 +27,23 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 50,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 56.0,
+    elevation: 5,
   },
+
   cardContainer: {
     flexDirection: 'row',
   },
   cardContainerCountDown: {
     flexDirection: 'row',
     marginLeft: 15,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   cardContainerDate: {
     flexDirection: 'column',
@@ -60,7 +69,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#485162',
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 15,
   },
   crudSection: {
     flexDirection: 'row',
@@ -89,17 +98,21 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: '#ffffff',
-    width: '90%',
+    width: '70%',
     height: 380,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
     padding: 20,
-    shadowColor: '#007aff',
+    shadowColor: '#7c7c7c',
     shadowOffset: {
-      width: 5,
-      height: 6,
+      width: 0,
+      height: 12,
     },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 14,
   },
   imageModal: {
     alignSelf: 'center',
@@ -170,13 +183,14 @@ export const styles = StyleSheet.create({
   },
   tittleDescricao: {
     alignSelf: 'center',
-    fontSize: 25,
+    fontSize: 30,
     color: '#0F3F49',
     fontWeight: 'bold',
     marginVertical: 25,
   },
   textDescricao: {
     textAlign: 'justify',
+    alignSelf: 'center',
     fontSize: 14,
     color: 'black',
   },

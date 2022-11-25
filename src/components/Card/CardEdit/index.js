@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Input} from '@rneui/themed';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function CardComponent() {
   const errorImage = require('../../assets/Error.png');
@@ -195,69 +194,8 @@ export default function CardComponent() {
               <Modal
                 animationType="fade"
                 transparent={true}
-                visible={isModalEditVisible}>
-                <View style={styles.centeredView}>
-                  <View style={styles.modalContainer}>
-                    <Input
-                      onChangeText={newText => {
-                        setEventDate(newText);
-                      }}
-                      label="Data do Evento"
-                      placeholder={eventDate}
-                      leftIcon={{type: 'font-awesome', name: 'calendar'}}
-                    />
-                    <Input
-                      onChangeText={newText => {
-                        setEventTittle(newText);
-                      }}
-                      label="Titulo do Evento"
-                      placeholder={eventTittle}
-                      leftIcon={{type: 'font-awesome5', name: 'flag'}}
-                    />
-                    <Input
-                      onChangeText={newText => {
-                        setEventDescription(newText);
-                      }}
-                      label="Descrição do Evento"
-                      placeholder={eventDescription}
-                      leftIcon={{type: 'font-awesome5', name: 'edit'}}
-                    />
-                    <View style={styles.buttonEdit}>
-                      <TouchableOpacity
-                        style={styles.ButtonCancelDelete}
-                        onPress={() => {
-                          setModalEditVisible(!isModalEditVisible);
-                        }}>
-                        <FontAwesome
-                          name={'times'}
-                          size={25}
-                          style={{alignSelf: 'center'}}
-                          color={'red'}
-                        />
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.ButtonOk}
-                        onPress={async () => {
-                          await editarEvento(
-                            eventDate,
-                            eventTittle,
-                            eventDescription,
-                            eventIdEdit,
-                          );
-                          await getData();
-                          setModalEditVisible(!isModalEditVisible);
-                        }}>
-                        <FontAwesome5
-                          name={'cloud-upload-alt'}
-                          size={25}
-                          style={{alignSelf: 'center'}}
-                          color={'#0F3F49'}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </Modal>
+                visible={isModalEditVisible}
+              />
               <Modal
                 animationType="fade"
                 transparent={true}

@@ -2,17 +2,15 @@ import {styles} from './styles.js';
 import React, {useEffect, useState} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import CardComponent from '../../components/Card';
-import {Input} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
+import {Input} from '@rneui/base';
 
-export default function ChallengeScreen() {
-  const [isModalVisible, setModalVisible] = useState(false);
+export default function CreateScreen() {
   const [eventDate, setEventDate] = useState('');
   const [eventTittle, setEventTittle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
-
   const navigation = useNavigation();
+
   const criarEvento = async (eventDate, eventTittle, eventDescription) => {
     const response = await fetch(
       'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents',
@@ -30,7 +28,6 @@ export default function ChallengeScreen() {
         }),
       },
     ).then(response => response.json());
-    console.log('RESPONSE', response);
 
     if (response.sucesso) {
       return response.evento;
@@ -46,33 +43,53 @@ export default function ChallengeScreen() {
             name={'arrow-left'}
             size={25}
             onPress={() => {
-              navigation.navigate('HomeScreen');
+              navigation.navigate('ChallengeScreen');
             }}
             style={{position: 'absolute', margin: 25}}
           />
-          <Text style={styles.textTittle}>Crie um Evento</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('CreateScreen');
-            }}
-            style={styles.modalButton}>
-            <FontAwesome5
-              name={'calendar-week'}
-              style={styles.iconModalButton}
-              size={30}
-            />
-          </TouchableOpacity>
         </View>
         <View style={styles.containerSuport}>
           <View style={styles.backgroundDownWhite}>
-            <View style={styles.sectionTittle}>
-              <Text style={styles.sectionTextTittle}>Eventos do Dia</Text>
+            <Text style={styles.textTittle}>Crie um Evento</Text>
+            <View style={styles.centeredView}>
+              <View style={styles.modalContainer}>
+                <Input
+                  autoFocus={false}
+                  onChangeText={newText => {
+                    setEventDate(newText);
+                  }}
+                  label="Data do Evento"
+                  leftIcon={{type: 'font-awesome', name: 'calendar'}}
+                />
+                <Input
+                  onChangeText={newText => {
+                    setEventTittle(newText);
+                  }}
+                  label="Titulo do Evento"
+                  leftIcon={{type: 'font-awesome5', name: 'flag'}}
+                />
+                <Input
+                  onChangeText={newText => {
+                    setEventDescription(newText);
+                  }}
+                  label="Descrição do Evento"
+                  leftIcon={{type: 'font-awesome5', name: 'edit'}}
+                />
+              </View>
+              <TouchableOpacity
+                style={styles.ButtonOk}
+                onPress={async () => {
+                  await criarEvento(eventDate, eventTittle, eventDescription);
+                  await navigation.navigate('ChallengeScreen');
+                }}>
+                <FontAwesome5
+                  name={'cloud-upload-alt'}
+                  size={25}
+                  style={{alignSelf: 'center'}}
+                  color={'#0F3F49'}
+                />
+              </TouchableOpacity>
             </View>
-
-            <CardComponent />
-            {/*<View style={styles.sectionTittle}>*/}
-            {/*  <Text style={styles.sectionTextTittle}>Eventos da Semana</Text>*/}
-            {/*</View>*/}
           </View>
         </View>
       </View>

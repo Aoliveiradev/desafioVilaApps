@@ -1,11 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  buttonEdit: {
-    width: '100%',
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-  },
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -64,7 +59,7 @@ export const styles = StyleSheet.create({
   },
   crudSection: {
     flexDirection: 'row',
-    paddingLeft: 10,
+    paddingLeft: 5,
   },
   crudIconsEdit: {
     marginRight: 15,
@@ -160,7 +155,7 @@ export const styles = StyleSheet.create({
     height: 50,
   },
   ButtonCancelDelete: {
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: '#e80000',
     borderRadius: 50,
     justifyContent: 'center',

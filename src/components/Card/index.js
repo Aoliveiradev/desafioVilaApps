@@ -18,6 +18,7 @@ export default function CardComponent() {
   const deleteMesage = 'TEM CERTEZA QUE DESEJA EXCLUIR O EVENTO ?';
 
   const [eventDate, setEventDate] = useState('');
+  const [countDownDate, setcountDownDate] = useState('');
   const [eventTittle, setEventTittle] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [refreshing, setRefreshing] = React.useState(false);
@@ -30,54 +31,11 @@ export default function CardComponent() {
   const [eventIdEdit, setEventIdEdit] = useState(0);
   const [modalTextError, setModalTextError] = useState(deleteMesage);
   const [modalDeleteImage, setModalDeleteImage] = useState(errorImage);
-  const [novoDia, setNovoDia] = useState(0);
-  const [diaAntigo, setDiaAntigo] = useState(0);
-  const [novoMes, setNovoMes] = useState(0);
-  const [mesAntigo, setMesAntigo] = useState(0);
-  const [novoAno, setNovoAno] = useState(0);
-  const [anoAntigo, setAnoAntigo] = useState(0);
   const [countDownText, setcountDownText] = useState('');
 
   useEffect(() => {
     getData();
   }, []);
-
-  const countdown = () => {
-    const newDate = new Date();
-
-    const newDateSubstring = newDate.toISOString().substring(0, 10);
-    const dateOld = eventDate;
-    console.log(eventDate);
-    const dateNew = newDateSubstring;
-
-    const [dayOld, monthOld, yearOld] = dateOld.split('/');
-    const [yearNew, monthNew, dayNew] = dateNew.split('-');
-    console.log('Inicio', eventDate, countDownText);
-
-    setNovoDia(dayNew);
-    setDiaAntigo(dayOld);
-    setNovoMes(monthNew);
-    setMesAntigo(monthOld);
-    setNovoAno(yearNew);
-    setAnoAntigo(yearOld);
-    console.log('diaANTIGO: ', diaAntigo);
-    if (diaAntigo > novoDia) {
-      setcountDownText(
-        'Seu evento acontecerá em ' + (diaAntigo - novoDia) + ' dias.',
-      );
-    } else if (novoDia > diaAntigo) {
-      setcountDownText('EXPIRADO');
-    }
-
-    console.log(
-      'dayOld: ',
-      diaAntigo,
-      'dayNew: ',
-      novoDia,
-      'dateNew: ',
-      dateNew,
-    );
-  };
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -112,7 +70,6 @@ export default function CardComponent() {
         }),
       },
     ).then(response => response.json());
-    console.log('RESPONSE', response);
 
     if (response.sucesso) {
       return response.evento;
@@ -122,7 +79,6 @@ export default function CardComponent() {
   };
 
   const deleteEvento = async eventId => {
-    console.log(eventId);
     const id = eventId;
     const response = await fetch(
       'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/' +
@@ -144,11 +100,26 @@ export default function CardComponent() {
         'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/',
       );
       const json = await response.json();
-      console.log(json);
       setData(json);
-      countdown();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const countdown = eventDate2 => {
+    const newDate = new Date();
+    const dateNew = newDate.toISOString().substring(0, 10);
+
+    const [dayOld, monthOld, yearOld] = eventDate2.split('/');
+    const [yearNew, monthNew, dayNew] = dateNew.split('-');
+    console.log('dia antigo: ', dayOld);
+
+    if (dayOld > dayNew) {
+      setcountDownText(
+        'Seu evento acontecerá em ' + (dayOld - dayNew) + ' dias.',
+      );
+    } else if (dayNew > dayOld) {
+      setcountDownText('EXPIRADO');
     }
   };
 
@@ -166,10 +137,8 @@ export default function CardComponent() {
                 onPress={() => {
                   setModalVisibleDescription(!isModalVisibleDescription);
                   setEventId(event.event_id);
-                  setEventDate(event.event_date);
-                  console.log('eventDate:', eventDate);
-                  countdown();
-                  console.log('eventDateInicial', event.event_date);
+                  const eventDate2 = event.event_date;
+                  countdown(eventDate2);
                 }}
                 style={styles.card}>
                 <View style={styles.cardContainer}>

@@ -46,12 +46,10 @@ export default function CardComponent() {
 
     const newDateSubstring = newDate.toISOString().substring(0, 10);
     const dateOld = eventDate;
-    console.log(eventDate);
     const dateNew = newDateSubstring;
 
     const [dayOld, monthOld, yearOld] = dateOld.split('/');
     const [yearNew, monthNew, dayNew] = dateNew.split('-');
-    console.log('Inicio', eventDate, countDownText);
 
     setNovoDia(dayNew);
     setDiaAntigo(dayOld);
@@ -59,7 +57,6 @@ export default function CardComponent() {
     setMesAntigo(monthOld);
     setNovoAno(yearNew);
     setAnoAntigo(yearOld);
-    console.log('diaANTIGO: ', diaAntigo);
     if (diaAntigo > novoDia) {
       setcountDownText(
         'Seu evento acontecerá em ' + (diaAntigo - novoDia) + ' dias.',
@@ -67,15 +64,6 @@ export default function CardComponent() {
     } else if (novoDia > diaAntigo) {
       setcountDownText('EXPIRADO');
     }
-
-    console.log(
-      'dayOld: ',
-      diaAntigo,
-      'dayNew: ',
-      novoDia,
-      'dateNew: ',
-      dateNew,
-    );
   };
 
   const onRefresh = React.useCallback(() => {
@@ -111,7 +99,6 @@ export default function CardComponent() {
         }),
       },
     ).then(response => response.json());
-    console.log('RESPONSE', response);
 
     if (response.sucesso) {
       return response.evento;
@@ -121,7 +108,6 @@ export default function CardComponent() {
   };
 
   const deleteEvento = async eventId => {
-    console.log(eventId);
     const id = eventId;
     const response = await fetch(
       'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/' +
@@ -143,7 +129,6 @@ export default function CardComponent() {
         'https://63707eb008218c267e005b81.mockapi.io/api/ajaxCalendarEvents/callendarEvents/',
       );
       const json = await response.json();
-      console.log(json);
       setData(json);
       countdown();
     } catch (error) {
@@ -166,9 +151,7 @@ export default function CardComponent() {
                   setModalVisibleDescription(!isModalVisibleDescription);
                   setEventId(event.event_id);
                   setEventDate(event.event_date);
-                  console.log('eventDate:', eventDate);
                   countdown();
-                  console.log('eventDateInicial', event.event_date);
                 }}
                 style={styles.card}>
                 <View style={styles.cardContainer}>

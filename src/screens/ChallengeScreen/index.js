@@ -30,7 +30,6 @@ export default function ChallengeScreen() {
         }),
       },
     ).then(response => response.json());
-    console.log('RESPONSE', response);
 
     if (response.sucesso) {
       return response.evento;

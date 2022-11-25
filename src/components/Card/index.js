@@ -36,13 +36,14 @@ export default function CardComponent() {
     getData();
   }, []);
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getData();
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   const editarEvento = async (
     eventDate,
@@ -133,7 +134,7 @@ export default function CardComponent() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <ScrollView
-        RefreshControl={
+        refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         style={styles.scrollView}>

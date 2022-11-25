@@ -112,7 +112,11 @@ export default function CardComponent() {
     const [diaEvento, mesEvento, anoEvento] = eventDate2.split('/');
     const [anoHoje, mesHoje, diaHoje] = dateNew.split('-');
     const quantidadeDiasParaEvento =
-      diaEvento - diaHoje + (mesEvento - mesHoje) * 30;
+      diaEvento -
+      diaHoje +
+      (mesEvento - mesHoje) * 30 +
+      (anoEvento - anoHoje) * 365;
+    console.log(quantidadeDiasParaEvento);
     if (quantidadeDiasParaEvento < 30 && quantidadeDiasParaEvento > 0) {
       setcountDownText(
         'Seu evento acontecerá em ' + quantidadeDiasParaEvento + ' dias.',
@@ -175,7 +179,6 @@ export default function CardComponent() {
                         setEventDate(newText);
                       }}
                       label="Data do Evento"
-                      placeholder={event.event_date}
                       leftIcon={{type: 'font-awesome', name: 'calendar'}}
                     />
                     <Input
@@ -183,7 +186,6 @@ export default function CardComponent() {
                         setEventTittle(newText);
                       }}
                       label="Titulo do Evento"
-                      placeholder={eventTittle}
                       leftIcon={{type: 'font-awesome5', name: 'flag'}}
                     />
                     <Input
@@ -191,7 +193,6 @@ export default function CardComponent() {
                         setEventDescription(newText);
                       }}
                       label="Descrição do Evento"
-                      placeholder={eventDescription}
                       leftIcon={{type: 'font-awesome5', name: 'edit'}}
                     />
                     <View style={styles.buttonEdit}>

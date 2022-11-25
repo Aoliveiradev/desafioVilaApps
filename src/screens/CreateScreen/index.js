@@ -83,6 +83,18 @@ export default function CreateScreen() {
                     color={'#0F3F49'}
                   />
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.ButtonCancel}
+                  onPress={() => {
+                    navigation.navigate('ChallengeScreen');
+                  }}>
+                  <FontAwesome
+                    name={'times'}
+                    size={25}
+                    style={{alignSelf: 'center'}}
+                    color={'red'}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
